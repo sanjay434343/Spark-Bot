@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 # 🚨 Bot Configuration
 TOKEN = os.getenv("TELEGRAM_TOKEN", "8289772457:AAEYnZhrwG5r_T3SI-1PkLwC2b3p1unMQUo")
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "231a4048dfb482ff12c57b82adce8ee0")
-WEBHOOK_URL = os.getenv("WEBHOOK_URL", "https://your-app-url.onrender.com/webhook")
+WEBHOOK_URL = os.getenv("WEBHOOK_URL", "https://spark-bot-no0e.onrender.com/webhook")
 
 # Global cache storage for user preferences
 USER_CACHE = {}
