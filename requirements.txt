@@ -3,3 +3,4 @@ requests>=2.25.1
 fastapi>=0.95.0
 uvicorn[standard]>=0.22.0
 urllib3>=1.26.0,<2.0
+setuptools<81
