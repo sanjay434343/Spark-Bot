@@ -726,6 +726,36 @@ def media_logger(update: Update, context: CallbackContext):
                     update.message.reply_text(setup_msg, parse_mode=ParseMode.MARKDOWN)
                 return
 
+            # Joke command
+            if prompt.startswith("@joke") or prompt.startswith("😄 @joke"):
+                joke = bot.get_joke()
+                update.message.reply_text(joke, parse_mode=ParseMode.MARKDOWN)
+                return
+
+            # Quote command
+            if prompt.startswith("@quote") or prompt.startswith("💭 @quote"):
+                quote = bot.get_quote()
+                update.message.reply_text(quote, parse_mode=ParseMode.MARKDOWN)
+                return
+
+            # Image command
+            if prompt.startswith("@image") or prompt.startswith("🖼️ @image"):
+                image_query = prompt.replace("🖼️ @image", "").replace("@image", "").strip()
+                if len(image_query) < 3:
+                    update.message.reply_text("🖼️ Please provide a description for the image.")
+                    return
+                try:
+                    response = requests.post("https://api.example.com/generate-image", json={"prompt": image_query}, timeout=10)
+                    if response.status_code == 200:
+                        image_url = response.json().get('image_url')
+                        update.message.reply_photo(photo=image_url, caption="🖼️ Here is your generated image:")
+                    else:
+                        update.message.reply_text("⚠️ Error generating image.")
+                except Exception as e:
+                    logger.error(f"Image generation error: {e}")
+                    update.message.reply_text("⚠️ Error processing your request.")
+                return
+
     except Exception as e:
         logger.error(f"Media logger error: {e}")
         update.message.reply_text("❌ Error processing your request. Please try again.")
